@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Research Highlight</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- -------- HERO / BANNER -------- -->
+  <header>
+    <div class="header-content">
+      <img src="michlogo.png" alt="University of Michigan Logo" class="logo">
+      <div class="header-text">
+        <h1>T-SPMO: A Compute-Efficient Approach to RL Fine-Tuning of LLMs</h1>
+        <p>By: Alan Lee & Harry Tong</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- -------- MAIN CONTENT -------- -->
+  <main>
+
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        Reinforcement learning (RL) is widely used to induce desirable behaviors in large language models (LLMs). Standard methods like Proximal Policy Optimization (PPO) rely on a separate critic network, which can be computationally costly [1]. Group Relative Policy Optimization (GRPO) removes the critic by using group-level reward statistics but still updates the policy using all tokens from sampled completions [2], which may waste compute and hurt performance on some reasoning tasks.
+        <br><br>
+        We propose Token-Specific Prefix Matching Optimization (T-SPMO), a critic-free RL method that assigns advantages at the token level. We evaluate it against a lightweight GRPO variant, Stochastic GRPO (S-GRPO), on multi-digit multiplication.
+      </p>
+    </section>
+
+    <section id="methodology">
+      <h2>Methodology</h2>
+      <p>
+        We fine-tune Qwen2-1.5B with k=8 LORA insertions into the query and value projections of the last 1/4 attention layers [3][4]. For S-GRPO, we sample with |G| = 12 completions, then update policy model with:
+      </p>
+      <div class="image-wrapper">
+        <img src="path/to/image1.jpg" alt="Methodology illustration">
+      </div>
+    </section>
+
+    <section id="results">
+      <h2>Experiments & Results</h2>
+      <p><!-- Replace with results text --></p>
+      <div class="image-wrapper">
+        <img src="path/to/image2.jpg" alt="Results chart">
+      </div>
+    </section>
+
+    <section id="conclusion">
+      <h2>Discussion &amp; Conclusion</h2>
+      <p>
+        We theorize that T-SPMO outperforms S-GRPO because the latter induces catastrophic forgetting in the model [5]. When rewards are sparse, the model often makes mistakes in the midst of surrounding reasonable decisions/calculations. By penalizing the entire sequence, the model's base multiplication ability may degrade.
+        We theorize that T-SPMO succeeds by selectively optimizing for specific decisions in each group of response, and doesn't penalize models for correct calculations.
+        A limitation of this work is the lack of benchline comparisons with unmodified GRPO and PPO, due to low computational budget. Creating comparisons would be a critical next step.
+        <br><br>
+        Future work: Stress‑test T‑SPMO on tasks with longer, semantically diverse chains‑of‑thought (e.g., GSM8K‑style reasoning). We expect incorporating a prefix tree that captures underlying meaning rather than exact token choices would increase the generalizability of algorithms based off of T-SPMO.
+        <br><br>
+        We believe that T-SPMO is best and may outperform other RL algorithms in use cases where completions are short but require information dense chains of thoughts. Given its computationally efficient nature, T-SPMO combined with LORA could make user-specific personalization features feasible for a wide range of LLM products and features. 
+      </p>
+    </section>
+
+  </main>
+
+  <!-- -------- CALL-TO-ACTION -------- -->
+  <footer>
+    <a href="https://example.com/fullpaper.pdf" class="cta" target="_blank" rel="noopener">
+      Read Full Paper
+    </a>
+  </footer>
+
+</body>
+</html>
