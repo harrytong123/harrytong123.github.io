@@ -59,7 +59,7 @@
     margin: 1.5rem 0;
   }
   section img {
-    max-width: 60%;
+    max-width: 70%;
     height: auto;
     border-radius: var(--radius);
   }
@@ -98,5 +98,15 @@
     text-align: center;
   }
   
+  .references-list {
+    text-align: left;
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+  }
+  
+  .references-list li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
   /* ----------  Optional dark
   

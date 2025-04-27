@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Research Highlight</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- External stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -41,33 +40,40 @@
       <div class="image-wrapper">
         <img src="equation1.png" alt="Methodology illustration">
       </div>
-      <p>For T-SPMO, we sample with |G| = 50 completions (due to its lower memory footprint). A prefix tree is built from completions to compute token-level advantage assignment:</p>
-      <div class="image-wrapper">
-        <img src="equation2.png" alt="Methodology illustration">
+      <p>
+        For T-SPMO, we sample with |G| = 50 completions (due to its lower memory footprint). A prefix tree is built from completions to compute token-level advantage assignment:
+      </p>
+      <div class="image-wrapper2">
+        <img src="equation2.png" style = "width: 40%" alt="Prefix tree equation">
       </div>
-      <p>Where p is a token prefix, and v is the chosen token.
-        The policy model is then updated with: 
-        </p>
-        <div class="image-wrapper">
-            <img src="equation3.png" alt="Methodology illustration">
-          </div>
-        <p>Where <b>U</b> is the set of unique (prefix, token) pairs. We incorporated replay into T-SPMO, in which we resample from a random position in a successful completion, and update our model accordingly again.
-
-            <br><br></bt>Evaluation: Exact‑match accuracy on randomly sampled 2–3‑digit multiplication. Binary correctness was used as our reward function.
-            </p>
+      <p>
+        Where p is a token prefix, and v is the chosen token.  
+        The policy model is then updated with:
+      </p>
+      <div class="image-wrapper">
+        <img src="equation3.png" alt="Policy update equation">
+      </div>
+      <p>
+        Where <b>U</b> is the set of unique (prefix, token) pairs. We incorporated replay into T-SPMO, in which we resample from a random position in a successful completion, and update our model accordingly again.
+        <br><br>
+        Evaluation: Exact‑match accuracy on randomly sampled 2–3‑digit multiplication. Binary correctness was used as our reward function.
+      </p>
     </section>
 
     <section id="results">
       <h2>Experiments & Results</h2>
-      <p>We first demonstrate that S-GRPO is an effective RL fine-tuning algorithm. We trained our model to perform 3 digit x 2 digit multiplication, and see significant improvements upon the baseline after 150 epochs. We observe our fine-tuned model utilizing the distributive property.
-        </p>
+      <p>
+        We first demonstrate that S-GRPO is an effective RL fine-tuning algorithm. We trained our model to perform 3 digit × 2 digit multiplication, and see significant improvements upon the baseline after 150 epochs. We observe our fine-tuned model utilizing the distributive property.
+      </p>
       <div class="image-wrapper">
-        <img src="chart1.png" alt="Results chart">
+        <img src="chart1.png" alt="Results chart 1">
       </div>
-      <p>We benchmark T-SPMO against S-GRPO on 3 digit x 3 digit multiplication. We find that despite only a seemingly small increase in difficulty,  this problem space proved to be much more challenging for the model to master. T‑SPMO outperforms S‑GRPO by +47 pp on 3‑digit × 3‑digit accuracy.
-    </p>
-    <div class="image-wrapper">
-        <img src="chart2.png" alt="Results chart">
+      <p>
+        We benchmark T-SPMO against S-GRPO on 3 digit × 3 digit multiplication. We find that despite only a seemingly small increase in difficulty, this problem space proved to be much more challenging for the model to master.  
+        T‑SPMO outperforms S‑GRPO by +47 pp on 3‑digit × 3‑digit accuracy.
+      </p>
+      <div class="image-wrapper">
+        <img src="chart2.png" alt="Results chart 2">
       </div>
     </section>
 
@@ -75,7 +81,9 @@
       <h2>Discussion &amp; Conclusion</h2>
       <p>
         We theorize that T-SPMO outperforms S-GRPO because the latter induces catastrophic forgetting in the model [5]. When rewards are sparse, the model often makes mistakes in the midst of surrounding reasonable decisions/calculations. By penalizing the entire sequence, the model's base multiplication ability may degrade.
+        <br><br>
         We theorize that T-SPMO succeeds by selectively optimizing for specific decisions in each group of response, and doesn't penalize models for correct calculations.
+        <br><br>
         A limitation of this work is the lack of benchline comparisons with unmodified GRPO and PPO, due to low computational budget. Creating comparisons would be a critical next step.
         <br><br>
         Future work: Stress‑test T‑SPMO on tasks with longer, semantically diverse chains‑of‑thought (e.g., GSM8K‑style reasoning). We expect incorporating a prefix tree that captures underlying meaning rather than exact token choices would increase the generalizability of algorithms based off of T-SPMO.
@@ -83,6 +91,38 @@
         We believe that T-SPMO is best and may outperform other RL algorithms in use cases where completions are short but require information dense chains of thoughts. Given its computationally efficient nature, T-SPMO combined with LORA could make user-specific personalization features feasible for a wide range of LLM products and features. 
       </p>
     </section>
+
+    <section id="references">
+        <h2>References</h2>
+        <ol class="references-list">
+          <li>
+            [1] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov, 
+            “Proximal Policy Optimization Algorithms,” 
+            <a href="https://arxiv.org/abs/1707.06347" target="_blank" rel="noopener">arXiv.org, 2017</a>. (accessed Apr. 20, 2025).
+          </li>
+          <li>
+            [2] Z. Shao et al., 
+            “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models,” 
+            <a href="https://arxiv.org/abs/2402.03300" target="_blank" rel="noopener">arXiv.org, 2024</a>. (accessed Apr. 20, 2025).
+          </li>
+          <li>
+            [3] A. Yang et al., 
+            “Qwen2 Technical Report,” 
+            <a href="https://arxiv.org/abs/2407.10671" target="_blank" rel="noopener">arXiv.org, 2024</a>. (accessed Apr. 20, 2025).
+          </li>
+          <li>
+            [4] E. J. Hu et al., 
+            “LoRA: Low-Rank Adaptation of Large Language Models,” 
+            <a href="https://arxiv.org/abs/2106.09685" target="_blank" rel="noopener">arXiv.org, 2021</a>. (accessed Apr. 20, 2025).
+          </li>
+          <li>
+            [5] Y. Luo, Z. Yang, F. Meng, Y. Li, J. Zhou, and Y. Zhang, 
+            “An Empirical Study of Catastrophic Forgetting in Large Language Models During Continual Fine-tuning,” 
+            <a href="https://arxiv.org/abs/2308.08747" target="_blank" rel="noopener">arXiv.org, 2023</a>. (accessed Apr. 20, 2025).
+          </li>
+        </ol>
+      </section>
+      
 
   </main>
 
