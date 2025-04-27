@@ -15,6 +15,7 @@
       <img src="michlogo.png" alt="University of Michigan Logo" class="logo">
       <div class="header-text">
         <h1>T-SPMO: A Compute-Efficient Approach to RL Fine-Tuning of LLMs</h1>
+        <h2>ROB 498 - 004: DeepRob</h2>
         <p>By: Alan Lee & Harry Tong</p>
       </div>
     </div>
@@ -38,15 +39,35 @@
         We fine-tune Qwen2-1.5B with k=8 LORA insertions into the query and value projections of the last 1/4 attention layers [3][4]. For S-GRPO, we sample with |G| = 12 completions, then update policy model with:
       </p>
       <div class="image-wrapper">
-        <img src="path/to/image1.jpg" alt="Methodology illustration">
+        <img src="equation1.png" alt="Methodology illustration">
       </div>
+      <p>For T-SPMO, we sample with |G| = 50 completions (due to its lower memory footprint). A prefix tree is built from completions to compute token-level advantage assignment:</p>
+      <div class="image-wrapper">
+        <img src="equation2.png" alt="Methodology illustration">
+      </div>
+      <p>Where p is a token prefix, and v is the chosen token.
+        The policy model is then updated with: 
+        </p>
+        <div class="image-wrapper">
+            <img src="equation3.png" alt="Methodology illustration">
+          </div>
+        <p>Where <b>U</b> is the set of unique (prefix, token) pairs. We incorporated replay into T-SPMO, in which we resample from a random position in a successful completion, and update our model accordingly again.
+
+            <br><br></bt>Evaluation: Exact‑match accuracy on randomly sampled 2–3‑digit multiplication. Binary correctness was used as our reward function.
+            </p>
     </section>
 
     <section id="results">
       <h2>Experiments & Results</h2>
-      <p><!-- Replace with results text --></p>
+      <p>We first demonstrate that S-GRPO is an effective RL fine-tuning algorithm. We trained our model to perform 3 digit x 2 digit multiplication, and see significant improvements upon the baseline after 150 epochs. We observe our fine-tuned model utilizing the distributive property.
+        </p>
       <div class="image-wrapper">
-        <img src="path/to/image2.jpg" alt="Results chart">
+        <img src="chart1.png" alt="Results chart">
+      </div>
+      <p>We benchmark T-SPMO against S-GRPO on 3 digit x 3 digit multiplication. We find that despite only a seemingly small increase in difficulty,  this problem space proved to be much more challenging for the model to master. T‑SPMO outperforms S‑GRPO by +47 pp on 3‑digit × 3‑digit accuracy.
+    </p>
+    <div class="image-wrapper">
+        <img src="chart2.png" alt="Results chart">
       </div>
     </section>
 
