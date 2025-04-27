@@ -102,11 +102,27 @@
     text-align: left;
     margin-top: 1rem;
     padding-left: 1.5rem;
+    max-width: 800px;
+  }
+  .references-list li {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .footer-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   
-  .references-list li {
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
+  .cta.secondary {
+    background: #555; /* Dark gray for contrast */
   }
+  
+  .cta.secondary:hover {
+    background: #333;
+  }
+  
   /* ----------  Optional dark
   
