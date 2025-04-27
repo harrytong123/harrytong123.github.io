@@ -1,0 +1,85 @@
+/* ----------  Root palette & layout helpers ---------- */
+:root {
+    /* Navy theme */
+    --primary: #0b2460;          /* deep navy */
+    --primary-hover: #05153a;    /* darker hover */
+    --dark:    #1d1d1d;
+    --light:   #f4f7fb;
+    --max-w:   900px;
+    --radius:  6px;
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: "Century Schoolbook", "Georgia", "Times New Roman", serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+  
+    /* NEW — global centering */
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* horizontal */
+    text-align: center;    /* text alignment */
+  }
+  
+  /* ----------  Top banner ---------- */
+  header {
+    width: 100%;
+    background: var(--primary);
+    color: #fff;
+    padding: 3rem 1rem;
+  }
+  header h1 { font-size: 3.5rem; margin-bottom: .5rem; }
+  
+  /* ----------  Main content area ---------- */
+  main {
+    max-width: var(--max-w);
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+  section {
+    background: #fff;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  
+    /* ensure text stays centered inside each card */
+    text-align: center;
+  }
+  section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: var(--primary);
+  }
+  .image-wrapper {
+    margin: 1.5rem 0;
+  }
+  section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+  }
+  
+  /* ----------  Footer / call-to-action ---------- */
+  footer {
+    padding: 3rem 1rem;
+  }
+  .cta {
+    display: inline-block;
+    padding: .9rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background .3s;
+  }
+  .cta:hover { background: var(--primary-hover); }
+  
+  /* ----------  Optional dark
+  
