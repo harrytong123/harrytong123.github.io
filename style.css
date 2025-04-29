@@ -123,6 +123,26 @@
   .cta.secondary:hover {
     background: #333;
   }
+
+  .member-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+  }
+  
+  .member {
+    text-align: center;
+  }
+  
+  .footer-note {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: #666;
+    text-align: center;
+  }
   
   /* ----------  Optional dark
   
