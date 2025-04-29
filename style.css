@@ -124,7 +124,7 @@
     background: #333;
   }
 
-  .member-info {
+  .member-info { 
     display: flex;
     justify-content: center;
     gap: 2rem;
